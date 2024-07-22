@@ -9,6 +9,7 @@ import Animepahe from "./providers/animepahe";
 import Animefox from "./providers/animefox";
 import Yugenanime from "./providers/yugenanime";
 import Bilibili from "./providers/bilibili";
+import { db, getAnime, initTable, saveAnime } from "./methods/db";
 
 const app = new Hono();
 const { colorize, combine, timestamp, simple } = format;
@@ -31,6 +32,8 @@ export const logger = winston.createLogger({
   ),
 });
 
+initTable();
+
 const zoro = new Zoro();
 const gogo = new Gogo();
 const aniwave = new Aniwave();
@@ -45,6 +48,30 @@ app.get("/", (c) => {
 
 app.get("/anime/:id", async (c) => {
   const { id } = c.req.param();
+  // Check for id in DB
+  const isSaved: any = getAnime(Number(id));
+  if (isSaved) {
+    return c.json(
+      {
+        status: 200,
+        anilistId: isSaved.id,
+        malId: isSaved.malId,
+        data: {
+          Sites: {
+            Animefox: JSON.parse(isSaved.Animefox),
+            Animepahe: JSON.parse(isSaved.Animepahe),
+            Aniwave: JSON.parse(isSaved.Aniwave),
+            Bilibili: JSON.parse(isSaved.Bilibili),
+            Gogoanime: JSON.parse(isSaved.Gogoanime),
+            Yugenanime: JSON.parse(isSaved.Yugenanime),
+            Zoro: JSON.parse(isSaved.Zoro),
+          },
+        },
+      } satisfies IResponse,
+      200
+    );
+  }
+
   const info = await fetchAnilistInfo(Number(id));
   if (!info)
     return c.json(
@@ -66,25 +93,24 @@ app.get("/anime/:id", async (c) => {
     yugenanime.search(title),
     zoro.search(title),
   ]);
-  return c.json(
-    {
-      status: 200,
-      anilistId: Number(id),
-      malId: Number(id),
-      data: {
-        Sites: {
-          Animefox: resp[0]?.Animefox || [],
-          Animepahe: resp[1]?.Animepahe || [],
-          Aniwave: resp[2]?.Aniwave || [],
-          Bilibili: resp[3]?.Bilibili || [],
-          Gogoanime: resp[4]?.Gogoanime || [],
-          Yugenanime: resp[5]!?.Yugenanime || [],
-          Zoro: resp[6]?.Zoro || [],
-        },
+  const finalResponse: IResponse = {
+    status: 200,
+    anilistId: Number(id),
+    malId: Number(id),
+    data: {
+      Sites: {
+        Animefox: resp[0]?.Animefox || [],
+        Animepahe: resp[1]?.Animepahe || [],
+        Aniwave: resp[2]?.Aniwave || [],
+        Bilibili: resp[3]?.Bilibili || [],
+        Gogoanime: resp[4]?.Gogoanime || [],
+        Yugenanime: resp[5]!?.Yugenanime || [],
+        Zoro: resp[6]?.Zoro || [],
       },
-    } satisfies IResponse,
-    200
-  );
+    },
+  };
+  saveAnime(finalResponse);
+  return c.json(finalResponse, 200);
 });
 
 app.get("*", (c) => {
