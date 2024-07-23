@@ -112,7 +112,7 @@ Contributions are welcome! Please open an issue or submit a pull request followi
 1. Fork this repository.
 2. Clone the forked repository to your local machine.
 3. Create your development branch like :
-   - feature - `git checkout -b feat/your-feature`.
+   - feature - `git checkout -b feat(<provider/file name>)/your-feature`.
    - fix - `git checkout -b fix/your-fix`.
    - refactor - `git checkout -b refactor/refactored-code`.
    - chore - `git checkout -b chore/your-chore`.
@@ -123,4 +123,4 @@ Contributions are welcome! Please open an issue or submit a pull request followi
 
 ## License
 
-This project is licensed under the [MIT](https://choosealicense.com/licenses/mit/) License. [License](https://github.com/IrfanKhan66/malmap#license)
+This project is licensed under the [MIT](https://choosealicense.com/licenses/mit/) License. [License](https://github.com/IrfanKhan66/malmap/blob/main/LICENSE)
