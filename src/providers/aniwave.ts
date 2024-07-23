@@ -56,6 +56,7 @@ export default class Aniwave {
         logger.error(
           `Unable to fetch data from aniwave ! error: ${err.message}`
         );
+        console.log(err);
         return null;
       }
       logger.error(`Error at aniwave provider: ${err}`);
