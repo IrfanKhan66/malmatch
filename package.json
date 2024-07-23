@@ -3,6 +3,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "bun run --hot src/index.ts",
+    "start": "bun src/index.ts",
     "update:db": "bun src/utils/crawl.ts",
     "log:db": "bun src/utils/log_db.ts"
   },
