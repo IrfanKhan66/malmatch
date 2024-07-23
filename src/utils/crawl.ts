@@ -43,13 +43,13 @@ const update = async (data: IDatabase[]) => {
   try {
     for (const site of data) {
       const malRes = await fetchMal(site.id);
-      if (!malRes) {
+      if (!malRes.data || malRes.status >= 400) {
         logger.error(
           `Failed to fetch Mal data for id : ${site.id} while updating db !`
         );
         continue;
       }
-      const title = malRes.title.toLowerCase();
+      const title = malRes.data.title.toLowerCase();
       const resp = await Promise.all([
         animefox.search(title),
         animepahe.search(title),
