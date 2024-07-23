@@ -82,9 +82,11 @@ export const updateAnime = async (
 
     if (Array.isArray(fields)) {
       for (const field of fields) {
+        logger.info(`Updating id: ${id} in db...`);
         if (field.data) await updateQuery(id, field.data?.Sites);
       }
     } else {
+      logger.info(`Updating id: ${id} in db...`);
       if (fields.data) await updateQuery(id, fields.data.Sites);
     }
 
