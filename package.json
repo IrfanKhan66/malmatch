@@ -1,5 +1,6 @@
 {
   "name": "animeid-mapper",
+  "license": "MIT",
   "scripts": {
     "dev": "bun run --hot src/index.ts",
     "update:db": "bun src/utils/crawl.ts",
