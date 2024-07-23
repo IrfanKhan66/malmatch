@@ -1,5 +1,5 @@
 {
-  "name": "animeid-mapper",
+  "name": "malmatch",
   "license": "MIT",
   "scripts": {
     "dev": "bun run --hot src/index.ts",

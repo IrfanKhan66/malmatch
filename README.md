@@ -1,4 +1,4 @@
-# MalMap
+# MalMatch
 
 An API that takes in a MyAnimeList ID of an anime and returns the same anime's details from various anime streaming sites like Zoro.to, Bilibili, Animefox, Animepahe, Gogoanime, and more.
 
@@ -32,8 +32,8 @@ This API allows you to fetch anime details from multiple streaming sites using t
 #### 1. Clone the repository
 
 ```bash
- git clone https://github.com/IrfanKhan66/malmap.git
- cd malmap
+ git clone https://github.com/IrfanKhan66/malmatch.git
+ cd malmatch
 ```
 
 #### 2. Install dependencies
@@ -123,4 +123,4 @@ Contributions are welcome! Please open an issue or submit a pull request followi
 
 ## License
 
-This project is licensed under the [MIT](https://choosealicense.com/licenses/mit/) License. [License](https://github.com/IrfanKhan66/malmap/blob/main/LICENSE)
+This project is licensed under the [MIT](https://choosealicense.com/licenses/mit/) License. [License](https://github.com/IrfanKhan66/malmatch/blob/main/LICENSE)
