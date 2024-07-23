@@ -39,7 +39,9 @@ export default class Yugenanime {
       };
     } catch (err: unknown) {
       if (err instanceof AxiosError) {
-        logger.error("Unable to fetch data from yugenanime !");
+        logger.error(
+          `Unable to fetch data from yugenanime ! error: ${err.message}`
+        );
         return null;
       }
       logger.error(`Error at yugenanime provider: ${err}`);

@@ -39,7 +39,7 @@ export default class Zoro {
       };
     } catch (err: unknown) {
       if (err instanceof AxiosError) {
-        logger.error("Unable to fetch data from zoro !");
+        logger.error(`Unable to fetch data from zoro ! error: ${err.message}`);
         return null;
       }
       logger.error(`Error at zoro provider: ${err}`);

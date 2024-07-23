@@ -46,7 +46,9 @@ export default class Aniwave {
       };
     } catch (err: unknown) {
       if (err instanceof AxiosError) {
-        logger.error("Unable to fetch data from aniwave !");
+        logger.error(
+          `Unable to fetch data from aniwave ! error: ${err.message}`
+        );
         return null;
       }
       logger.error(`Error at aniwave provider: ${err}`);

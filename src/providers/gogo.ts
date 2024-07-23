@@ -44,7 +44,9 @@ export default class Gogo {
       };
     } catch (err: unknown) {
       if (err instanceof AxiosError) {
-        logger.error("Unable to fetch data from goganime !");
+        logger.error(
+          `Unable to fetch data from gogoanime ! error: ${err.message}`
+        );
         return null;
       }
       logger.error(`Error at goganime provider: ${err}`);
