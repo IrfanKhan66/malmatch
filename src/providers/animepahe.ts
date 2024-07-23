@@ -1,6 +1,5 @@
 import { AxiosError } from "axios";
 import { logger } from "..";
-import load from "../methods/loadHtml";
 import similarity from "../methods/similarity";
 import client from "../utils/client";
 

@@ -3,6 +3,8 @@ import { logger } from "..";
 import load from "../methods/loadHtml";
 import similarity from "../methods/similarity";
 
+let retried = false;
+
 export default class Zoro {
   private readonly baseUrl = "https://hianime.to";
 
@@ -38,6 +40,11 @@ export default class Zoro {
         ],
       };
     } catch (err: unknown) {
+      if (!retried) {
+        logger.info(`Retrying zoro provider !`);
+        await new Zoro().search(title);
+        retried = true;
+      }
       if (err instanceof AxiosError) {
         logger.error(`Unable to fetch data from zoro ! error: ${err.message}`);
         return null;

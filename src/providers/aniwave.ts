@@ -3,6 +3,8 @@ import { logger } from "..";
 import load from "../methods/loadHtml";
 import similarity from "../methods/similarity";
 
+let retried = false;
+
 export default class Aniwave {
   private readonly baseUrl = "https://aniwavetv.to";
 
@@ -45,6 +47,11 @@ export default class Aniwave {
         ],
       };
     } catch (err: unknown) {
+      if (!retried) {
+        logger.info(`Retrying aniwave provider !`);
+        await new Aniwave().search(title);
+        retried = true;
+      }
       if (err instanceof AxiosError) {
         logger.error(
           `Unable to fetch data from aniwave ! error: ${err.message}`
