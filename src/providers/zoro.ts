@@ -25,10 +25,10 @@ export default class Zoro {
           title: $(el).find(".film-detail .film-name a").text() as string,
         }))
         .get();
-      logger.info(`zoro animeList - ${animeList}`);
+      console.log(`zoro animeList - ${animeList}`);
 
       const mostSimilar = similarity(animeList, title);
-      logger.info(`zoro mostSimilar - ${mostSimilar}`);
+      console.log(`zoro mostSimilar - ${mostSimilar}`);
 
       return {
         Zoro: [
