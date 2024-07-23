@@ -1,9 +1,7 @@
-import { AxiosError } from "axios";
+import axios, { AxiosError } from "axios";
 import { logger } from "..";
 import load from "../methods/loadHtml";
 import similarity from "../methods/similarity";
-
-let retried = false;
 
 export default class Aniwave {
   private readonly baseUrl = "https://aniwavetv.to";
@@ -47,16 +45,10 @@ export default class Aniwave {
         ],
       };
     } catch (err: unknown) {
-      if (!retried) {
-        logger.info(`Retrying aniwave provider !`);
-        retried = true;
-        await new Aniwave().search(title);
-      }
       if (err instanceof AxiosError) {
         logger.error(
           `Unable to fetch data from aniwave ! error: ${err.message}`
         );
-        console.log(err);
         return null;
       }
       logger.error(`Error at aniwave provider: ${err}`);

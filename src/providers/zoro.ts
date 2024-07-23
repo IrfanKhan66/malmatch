@@ -3,8 +3,6 @@ import { logger } from "..";
 import load from "../methods/loadHtml";
 import similarity from "../methods/similarity";
 
-let retried = false;
-
 export default class Zoro {
   private readonly baseUrl = "https://hianime.to";
 
@@ -25,10 +23,8 @@ export default class Zoro {
           title: $(el).find(".film-detail .film-name a").text() as string,
         }))
         .get();
-      console.log(`zoro animeList - ${animeList}`);
 
       const mostSimilar = similarity(animeList, title);
-      console.log(`zoro mostSimilar - ${mostSimilar}`);
 
       return {
         Zoro: [
@@ -42,11 +38,6 @@ export default class Zoro {
         ],
       };
     } catch (err: unknown) {
-      if (!retried) {
-        logger.info(`Retrying zoro provider !`);
-        retried = true;
-        await new Zoro().search(title);
-      }
       if (err instanceof AxiosError) {
         logger.error(`Unable to fetch data from zoro ! error: ${err.message}`);
         return null;

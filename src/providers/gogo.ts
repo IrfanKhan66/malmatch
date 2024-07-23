@@ -10,14 +10,24 @@ export default class Gogo {
     try {
       logger.info("Fetching data from gogoanime...");
 
-      const $ = await load(`${this.baseUrl}/search.html?keyword=${title}`);
+      const $ = await load(`${this.baseUrl}/search.html?keyword=${title}`, {
+        headers: {
+          "User-Agent":
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
+          "X-Requested-With": "XMLHttpRequest",
+        },
+      });
 
-      const animeList: AnimeInfo[] = $(".main_body .last_episodes .items li")
+      const animeList: AnimeInfo[] = $("body .list_search_ajax")
         .map((i, el) => ({
-          title: $(el).find(".name a").text(),
-          img: $(el).find(".img > a img").attr("src") || null,
-          id: $(el).find(".img > a").attr("href")?.split("/")[2] as string,
-          url: `${this.baseUrl}${$(el).find(".img > a").attr("href")}` || null,
+          title: $(el).find("a").text().trim(),
+          img:
+            $(el)
+              .find("a > div")
+              .attr("style")
+              ?.match(/url\(\'(.*)\'\);/)?.[1] || null,
+          id: $(el).find("a").attr("href")?.split("/")[2] as string,
+          url: `${this.baseUrl}${$(el).find("a").attr("href")}` || null,
         }))
         .get();
 
