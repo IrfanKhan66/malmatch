@@ -19,7 +19,6 @@ interface Sites {
 
 interface IResponse {
   status: number;
-  anilistId: number;
   malId: number;
   error?: string;
   data?: {
@@ -27,16 +26,13 @@ interface IResponse {
   };
 }
 
-interface ITitle {
-  english: string | null;
-  romaji: string | null;
-  native: string | null;
-  userPreferred: string | null;
-}
-
-interface IAnilistRes {
+interface IMalRes {
   id: number;
-  title: ITitle;
+  title: string;
+  main_picture: {
+    medium: string;
+    large: string;
+  };
 }
 
 interface AnimeInfo {

@@ -4,13 +4,12 @@ import { logger } from "..";
 
 const dbPath = path.join(__dirname, "../../src/db/mapped.sqlite");
 
-export const db = new Database(dbPath, { create: true });
+const db = new Database(dbPath, { create: true });
 
 export const initTable = () => {
   db.run(`
     CREATE TABLE IF NOT EXISTS MappedAnime (
         id INTEGER PRIMARY KEY,
-        malId INTEGER,
         Animefox TEXT,
         Animepahe TEXT,
         Aniwave TEXT,
@@ -25,15 +24,14 @@ export const initTable = () => {
 
 export const saveAnime = (resp: IResponse) => {
   try {
-    const { anilistId, malId, data } = resp;
+    const { malId, data } = resp;
 
     db.run(
       `
-        INSERT INTO MappedAnime (id, malId, Animefox, Animepahe, Aniwave, Bilibili, Gogoanime, Yugenanime, Zoro)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO MappedAnime (id, Animefox, Animepahe, Aniwave, Bilibili, Gogoanime, Yugenanime, Zoro)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
     `,
       [
-        anilistId,
         malId,
         JSON.stringify(data?.Sites.Animefox),
         JSON.stringify(data?.Sites.Animepahe),
@@ -45,7 +43,7 @@ export const saveAnime = (resp: IResponse) => {
       ]
     );
 
-    logger.info(`Saved id: ${anilistId} to database`);
+    logger.info(`Saved id: ${malId} to database`);
   } catch (err: unknown) {
     logger.error(`Error occured while inserting in database: ${err}`);
     return null;

@@ -1,24 +1,23 @@
 import { Hono } from "hono";
 import winston, { format } from "winston";
-import fetchAnilistInfo from "./methods/fetchAnilistInfo";
+import fetchMal from "./methods/fetchMal";
 import Zoro from "./providers/zoro";
-import t from "./methods/normalize";
 import Gogo from "./providers/gogo";
 import Aniwave from "./providers/aniwave";
 import Animepahe from "./providers/animepahe";
 import Animefox from "./providers/animefox";
 import Yugenanime from "./providers/yugenanime";
 import Bilibili from "./providers/bilibili";
-import { db, getAnime, initTable, saveAnime } from "./methods/db";
+import { getAnime, initTable, saveAnime } from "./methods/db";
 
 const app = new Hono();
 const { colorize, combine, timestamp, simple } = format;
 
 const loggerColors = {
   error: "red",
-  info: "blue",
-  warn: "orange",
-  debug: "yellow",
+  info: "green",
+  warn: "yellow",
+  debug: "blue",
 };
 
 export const logger = winston.createLogger({
@@ -54,8 +53,7 @@ app.get("/anime/:id", async (c) => {
     return c.json(
       {
         status: 200,
-        anilistId: isSaved.id,
-        malId: isSaved.malId,
+        malId: isSaved.id,
         data: {
           Sites: {
             Animefox: JSON.parse(isSaved.Animefox),
@@ -72,18 +70,17 @@ app.get("/anime/:id", async (c) => {
     );
   }
 
-  const info = await fetchAnilistInfo(Number(id));
+  const info = await fetchMal(Number(id));
   if (!info)
     return c.json(
       {
-        status: 429,
-        anilistId: Number(id),
+        status: 500,
         malId: Number(id),
-        error: "Rate limited !",
+        error: "Failed to get MAL data !",
       } satisfies IResponse,
-      429
+      500
     );
-  const title = t(info.title);
+  const title = info.title.toLowerCase();
   const resp = await Promise.all([
     animefox.search(title),
     animepahe.search(title),
@@ -95,7 +92,6 @@ app.get("/anime/:id", async (c) => {
   ]);
   const finalResponse: IResponse = {
     status: 200,
-    anilistId: Number(id),
     malId: Number(id),
     data: {
       Sites: {
