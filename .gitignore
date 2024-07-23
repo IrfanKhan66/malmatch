@@ -2,7 +2,7 @@
 node_modules/
 
 # db
-db/mapped.sqlite
+src/db/mapped.sqlite
 
 # env
 .env.*
