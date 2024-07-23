@@ -27,12 +27,15 @@ interface IResponse {
 }
 
 interface IMalRes {
-  id: number;
-  title: string;
-  main_picture: {
-    medium: string;
-    large: string;
-  };
+  status: number;
+  data: {
+    id: number;
+    title: string;
+    main_picture: {
+      medium: string;
+      large: string;
+    };
+  } | null;
 }
 
 interface AnimeInfo {

@@ -71,16 +71,19 @@ app.get("/anime/:id", async (c) => {
   }
 
   const info = await fetchMal(Number(id));
-  if (!info)
+  if (!info.data || info.status >= 400) {
     return c.json(
       {
-        status: 500,
+        status: info.status,
         malId: Number(id),
         error: "Failed to get MAL data !",
       } satisfies IResponse,
-      500
+      {
+        status: info.status,
+      }
     );
-  const title = info.title.toLowerCase();
+  }
+  const title = info.data.title.toLowerCase();
   const resp = await Promise.all([
     animefox.search(title),
     animepahe.search(title),
