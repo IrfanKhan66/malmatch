@@ -49,8 +49,8 @@ export default class Aniwave {
     } catch (err: unknown) {
       if (!retried) {
         logger.info(`Retrying aniwave provider !`);
-        await new Aniwave().search(title);
         retried = true;
+        await new Aniwave().search(title);
       }
       if (err instanceof AxiosError) {
         logger.error(

@@ -42,8 +42,8 @@ export default class Zoro {
     } catch (err: unknown) {
       if (!retried) {
         logger.info(`Retrying zoro provider !`);
-        await new Zoro().search(title);
         retried = true;
+        await new Zoro().search(title);
       }
       if (err instanceof AxiosError) {
         logger.error(`Unable to fetch data from zoro ! error: ${err.message}`);
