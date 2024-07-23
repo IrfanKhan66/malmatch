@@ -1,7 +1,9 @@
 {
   "name": "animeid-mapper",
   "scripts": {
-    "dev": "bun run --hot src/index.ts"
+    "dev": "bun run --hot src/index.ts",
+    "update:db": "bun src/utils/crawl.ts",
+    "log:db": "bun src/utils/log_db.ts"
   },
   "dependencies": {
     "axios": "^1.7.2",

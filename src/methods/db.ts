@@ -4,7 +4,7 @@ import { logger } from "..";
 
 const dbPath = path.join(__dirname, "../../src/db/mapped.sqlite");
 
-const db = new Database(dbPath, { create: true });
+export const db = new Database(dbPath, { create: true });
 
 export const initTable = () => {
   db.run(`
@@ -56,4 +56,40 @@ export const getAnime = (id: number) => {
   if (!data) return null;
 
   return data;
+};
+
+export const updateAnime = async (
+  id: number,
+  { fields }: { fields: IResponse | IResponse[] }
+) => {
+  try {
+    const updateQuery = (id: number, sites: Sites) => {
+      return db
+        .query(
+          "UPDATE MappedAnime SET Animefox = $animefox, Animepahe = $animepahe, Aniwave = $aniwave, Bilibili = $bilibili, Gogoanime = $gogoanime, Yugenanime = $yugenanime, Zoro = $zoro WHERE id = $id"
+        )
+        .run({
+          $id: id,
+          $animefox: JSON.stringify(sites.Animefox),
+          $animepahe: JSON.stringify(sites.Animepahe),
+          $aniwave: JSON.stringify(sites.Aniwave),
+          $bilibili: JSON.stringify(sites.Bilibili),
+          $gogoanime: JSON.stringify(sites.Gogoanime),
+          $yugenanime: JSON.stringify(sites.Yugenanime),
+          $zoro: JSON.stringify(sites.Zoro),
+        });
+    };
+
+    if (Array.isArray(fields)) {
+      for (const field of fields) {
+        if (field.data) await updateQuery(id, field.data?.Sites);
+      }
+    } else {
+      if (fields.data) await updateQuery(id, fields.data.Sites);
+    }
+
+    logger.info("Successfully updated db !");
+  } catch (err: unknown) {
+    logger.error("Failed to update db at db.ts !", err);
+  }
 };

@@ -52,7 +52,7 @@ const fetchMal = async (id: number) => {
         } else if (err.status === 400)
           logger.error(`Mal request error: ${err.message}`);
         else logger.error("Unknown Axios error at Anilist");
-      }
+      } else logger.error(`Mal request error no status provided: ${err.cause}`);
     } else logger.error("Failed to fetch info from Anilist !");
     return null;
   }
