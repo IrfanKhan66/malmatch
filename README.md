@@ -2,6 +2,8 @@
 
 An API that takes in a MyAnimeList ID of an anime and returns the same anime's details from various anime streaming sites like Zoro.to, Bilibili, Animefox, Animepahe, Gogoanime, and more.
 
+## ⚠️ This project still has some mapping issues
+
 ## Table of Contents
 
 - [Introduction](#introduction)
