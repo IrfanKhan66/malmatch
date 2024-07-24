@@ -31,6 +31,11 @@ interface IMalRes {
   data: {
     id: number;
     title: string;
+    alternative_titles: {
+      synonyms: string[];
+      en: string;
+      ja: string;
+    };
     main_picture: {
       medium: string;
       large: string;

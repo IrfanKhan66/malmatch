@@ -7,7 +7,7 @@ const fetchMal = async (id: number): Promise<IMalRes> => {
     const resp = await client.get(
       `${
         process.env.MAL_API_ENDPOINT as string
-      }/anime/${id}?fields=id,main_picture,title`,
+      }/anime/${id}?fields=id,main_picture,title,alternative_titles`,
       {
         headers: {
           Authorization: `Bearer ${process.env.MAL_ACCESS_TOKEN}`,

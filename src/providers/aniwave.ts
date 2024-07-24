@@ -1,4 +1,4 @@
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import { logger } from "..";
 import load from "../methods/loadHtml";
 import similarity from "../methods/similarity";
@@ -10,7 +10,17 @@ export default class Aniwave {
     try {
       logger.info("Fetching data from aniwave...");
 
-      const $ = await load(`${this.baseUrl}/filter?keyword=${title}`);
+      const $ = await load(
+        `${this.baseUrl}/filter?keyword=${title}`,
+        {
+          headers: {
+            "User-Agent":
+              "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
+            "X-Requested-With": "XMLHttpRequest",
+          },
+        },
+        "result"
+      );
 
       const animeList: AnimeInfo[] = $("#list-items .item .inner")
         .map((i, el) => {

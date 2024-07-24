@@ -83,15 +83,18 @@ app.get("/anime/:id", async (c) => {
       }
     );
   }
-  const title = info.data.title.toLowerCase();
+  const title = info.data.title.toLowerCase(),
+    enTitle = info.data.alternative_titles.en
+      ? info.data.alternative_titles.en.toLowerCase()
+      : title;
   const resp = await Promise.all([
     animefox.search(title),
     animepahe.search(title),
-    aniwave.search(title),
-    bilibili.search(title),
+    aniwave.search(enTitle),
+    bilibili.search(enTitle),
     gogo.search(title),
     yugenanime.search(title),
-    zoro.search(title),
+    zoro.search(enTitle),
   ]);
   const finalResponse: IResponse = {
     status: 200,
