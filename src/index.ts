@@ -9,6 +9,7 @@ import Animefox from "./providers/animefox";
 import Yugenanime from "./providers/yugenanime";
 import Bilibili from "./providers/bilibili";
 import { getAnime, initTable, saveAnime } from "./methods/db";
+import cron from "./utils/cron_job";
 
 const app = new Hono();
 const { colorize, combine, timestamp, simple } = format;
@@ -40,6 +41,8 @@ const animepahe = new Animepahe();
 const animefox = new Animefox();
 const yugenanime = new Yugenanime();
 const bilibili = new Bilibili();
+
+cron();
 
 app.get("/", (c) => {
   return c.text("Hey there !");
