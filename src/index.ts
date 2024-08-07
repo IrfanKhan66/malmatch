@@ -35,7 +35,7 @@ initTable();
 
 const zoro = new Zoro();
 const gogo = new Gogo();
-const aniwave = new Aniwave();
+// const aniwave = new Aniwave();
 const animepahe = new Animepahe();
 const animefox = new Animefox();
 const yugenanime = new Yugenanime();
@@ -58,7 +58,7 @@ app.get("/anime/:id", async (c) => {
           Sites: {
             Animefox: JSON.parse(isSaved.Animefox),
             Animepahe: JSON.parse(isSaved.Animepahe),
-            Aniwave: JSON.parse(isSaved.Aniwave),
+            // Aniwave: JSON.parse(isSaved.Aniwave),
             Bilibili: JSON.parse(isSaved.Bilibili),
             Gogoanime: JSON.parse(isSaved.Gogoanime),
             Yugenanime: JSON.parse(isSaved.Yugenanime),
@@ -90,7 +90,7 @@ app.get("/anime/:id", async (c) => {
   const resp = await Promise.all([
     animefox.search(title),
     animepahe.search(title),
-    aniwave.search(enTitle),
+    // aniwave.search(enTitle),
     bilibili.search(enTitle),
     gogo.search(title),
     yugenanime.search(title),
@@ -103,11 +103,11 @@ app.get("/anime/:id", async (c) => {
       Sites: {
         Animefox: resp[0]?.Animefox || [],
         Animepahe: resp[1]?.Animepahe || [],
-        Aniwave: resp[2]?.Aniwave || [],
-        Bilibili: resp[3]?.Bilibili || [],
-        Gogoanime: resp[4]?.Gogoanime || [],
-        Yugenanime: resp[5]!?.Yugenanime || [],
-        Zoro: resp[6]?.Zoro || [],
+        // Aniwave: resp[2]?.Aniwave || [],
+        Bilibili: resp[2]?.Bilibili || [],
+        Gogoanime: resp[3]?.Gogoanime || [],
+        Yugenanime: resp[4]!?.Yugenanime || [],
+        Zoro: resp[5]?.Zoro || [],
       },
     },
   };

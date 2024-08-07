@@ -1,5 +1,6 @@
 # deps
 node_modules/
+bun.lockb
 
 # db
 src/db/mapped.sqlite

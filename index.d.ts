@@ -11,7 +11,7 @@ interface Sites {
   Zoro: DetailsFromSite[];
   Gogoanime: DetailsFromSite[];
   Animepahe: DetailsFromSite[];
-  Aniwave: DetailsFromSite[];
+  // Aniwave: DetailsFromSite[];
   Animefox: DetailsFromSite[];
   Yugenanime: DetailsFromSite[];
   Bilibili: DetailsFromSite[];

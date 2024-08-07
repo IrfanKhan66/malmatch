@@ -4,7 +4,7 @@ import load from "../methods/loadHtml";
 import similarity from "../methods/similarity";
 
 export default class Aniwave {
-  private readonly baseUrl = "https://aniwavetv.to";
+  private readonly baseUrl = "https://aniwave.se";
 
   async search(title: string): Promise<Pick<Sites, "Aniwave"> | null> {
     try {
