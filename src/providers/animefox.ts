@@ -11,6 +11,7 @@ export default class Animefox {
       logger.info("Fetching data from animefox...");
 
       const $ = await load(`${this.baseUrl}/anime?search-keywords=${title}`);
+      console.log(`Animefox: ${$(".film_list-wrap .flw-item").first().html()}`);
 
       const animeList: AnimeInfo[] = $(".film_list-wrap .flw-item")
         .map((i, el) => ({
@@ -25,7 +26,6 @@ export default class Animefox {
         .get();
 
       const mostSimilar = similarity(animeList, title);
-      console.log(`Animefox : ${animeList} , mostSimilar: ${mostSimilar}`);
       const secondMostSimilar = similarity(animeList, `${title} dub`);
 
       return {

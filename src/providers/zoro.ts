@@ -11,6 +11,7 @@ export default class Zoro {
       logger.info("Fetching data from zoro...");
 
       const $ = await load(`${this.baseUrl}/search?keyword=${title}`);
+      console.log(`Zoro: ${$(".film_list-wrap .flw-item").first().html()}`);
 
       const animeList: AnimeInfo[] = $(".film_list-wrap .flw-item")
         .map((i, el) => ({
@@ -25,7 +26,6 @@ export default class Zoro {
         .get();
 
       const mostSimilar = similarity(animeList, title);
-      console.log(`Zoro: ${animeList} , mostSimilar: ${mostSimilar}`);
 
       return {
         Zoro: [
