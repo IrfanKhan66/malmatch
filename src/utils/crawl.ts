@@ -1,5 +1,5 @@
 import { logger } from "..";
-import { db, saveAnime, updateAnime } from "../methods/db";
+import { db, updateAnime } from "../methods/db";
 import fetchMal from "../methods/fetchMal";
 import Zoro from "../providers/zoro";
 import Gogo from "../providers/gogo";
@@ -13,7 +13,6 @@ interface IDatabase {
   id: number;
   Animefox: string;
   Animepahe: string;
-  Aniewave: string;
   Bilibili: string;
   Gogoanime: string;
   Yugenanime: string;
@@ -22,7 +21,7 @@ interface IDatabase {
 
 const zoro = new Zoro();
 const gogo = new Gogo();
-const aniwave = new Aniwave();
+// const aniwave = new Aniwave();
 const animepahe = new Animepahe();
 const animefox = new Animefox();
 const yugenanime = new Yugenanime();
