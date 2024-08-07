@@ -10,8 +10,13 @@ export default class Zoro {
     try {
       logger.info("Fetching data from zoro...");
 
-      const $ = await load(`${this.baseUrl}/search?keyword=${title}`);
-      console.log(`Zoro: ${$(".film_list-wrap .flw-item").first().html()}`);
+      const $ = await load(`${this.baseUrl}/search?keyword=${title}`, {
+        headers: {
+          "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
+        "X-Requested-With": "XMLHttpRequest",
+        },
+      });
 
       const animeList: AnimeInfo[] = $(".film_list-wrap .flw-item")
         .map((i, el) => ({

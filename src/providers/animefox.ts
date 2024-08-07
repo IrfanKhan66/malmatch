@@ -10,8 +10,14 @@ export default class Animefox {
     try {
       logger.info("Fetching data from animefox...");
 
-      const $ = await load(`${this.baseUrl}/anime?search-keywords=${title}`);
-      console.log(`Animefox: ${$(".film_list-wrap .flw-item").first().html()}`);
+      const $ = await load(`${this.baseUrl}/anime?search-keywords=${title}`, {
+        headers: {
+          "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
+        "X-Requested-With": "XMLHttpRequest",
+        },
+      });
+      // console.log(`Animefox: ${$(".film_list-wrap .flw-item").first().html()}`);
 
       const animeList: AnimeInfo[] = $(".film_list-wrap .flw-item")
         .map((i, el) => ({

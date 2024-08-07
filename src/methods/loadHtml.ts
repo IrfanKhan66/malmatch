@@ -15,10 +15,8 @@ const load = async (
     if (typeof resp.data === "object" && field) {
       cheerio_func = cheerio_load(resp.data[field]);
     } else cheerio_func = cheerio_load(resp.data);
-    console.log(`At loadHtml.ts Response: ${resp.data}, Response status: ${resp.status}`);
     return cheerio_func;
   } catch (err: unknown) {
-    console.error(`At loadHtml.ts Error: ${err}`);
     throw err;
   }
 };
