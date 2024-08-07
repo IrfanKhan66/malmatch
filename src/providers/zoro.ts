@@ -11,7 +11,7 @@ export default class Zoro {
     try {
       logger.info("Fetching data from zoro...");
 
-      const $ = await load(`${this.baseUrl}/search?keyword=${title}`, {
+      const $ = await load(`${this.baseUrl}/search?keyword=${title}&page=1&sort=default`, {
         headers: {
          "User-Agent": USER_AGENT,
           "Accept-Encoding": ACCEPT_ENCODING_HEADER,

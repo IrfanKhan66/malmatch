@@ -3,7 +3,7 @@ import { db, updateAnime } from "../methods/db";
 import fetchMal from "../methods/fetchMal";
 import Zoro from "../providers/zoro";
 import Gogo from "../providers/gogo";
-import Aniwave from "../providers/aniwave";
+// import Aniwave from "../providers/aniwave";
 import Animepahe from "../providers/animepahe";
 import Animefox from "../providers/animefox";
 import Yugenanime from "../providers/yugenanime";
