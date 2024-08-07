@@ -25,6 +25,7 @@ export default class Zoro {
         .get();
 
       const mostSimilar = similarity(animeList, title);
+      console.log(`Zoro: ${animeList} , mostSimilar: ${mostSimilar}`);
 
       return {
         Zoro: [

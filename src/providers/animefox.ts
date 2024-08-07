@@ -25,6 +25,7 @@ export default class Animefox {
         .get();
 
       const mostSimilar = similarity(animeList, title);
+      console.log(`Animefox : ${animeList} , mostSimilar: ${mostSimilar}`);
       const secondMostSimilar = similarity(animeList, `${title} dub`);
 
       return {

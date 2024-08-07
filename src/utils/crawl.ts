@@ -53,7 +53,7 @@ const update = async (data: IDatabase[]) => {
       const resp = await Promise.all([
         animefox.search(title),
         animepahe.search(title),
-        aniwave.search(title),
+        // aniwave.search(title),
         bilibili.search(title),
         gogo.search(title),
         yugenanime.search(title),
@@ -66,11 +66,11 @@ const update = async (data: IDatabase[]) => {
           Sites: {
             Animefox: resp[0]?.Animefox || [],
             Animepahe: resp[1]?.Animepahe || [],
-            Aniwave: resp[2]?.Aniwave || [],
-            Bilibili: resp[3]?.Bilibili || [],
-            Gogoanime: resp[4]?.Gogoanime || [],
-            Yugenanime: resp[5]!?.Yugenanime || [],
-            Zoro: resp[6]?.Zoro || [],
+            // Aniwave: resp[2]?.Aniwave || [],
+            Bilibili: resp[2]?.Bilibili || [],
+            Gogoanime: resp[3]?.Gogoanime || [],
+            Yugenanime: resp[4]!?.Yugenanime || [],
+            Zoro: resp[5]?.Zoro || [],
           },
         },
       };
