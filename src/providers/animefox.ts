@@ -2,6 +2,7 @@ import { AxiosError } from "axios";
 import { logger } from "..";
 import load from "../methods/loadHtml";
 import similarity from "../methods/similarity";
+import { ACCEPT_ENCODING_HEADER, ACCEPT_HEADER, USER_AGENT } from "../utils/constant";
 
 export default class Animefox {
   private readonly baseUrl = "https://animefox.in";
@@ -12,9 +13,9 @@ export default class Animefox {
 
       const $ = await load(`${this.baseUrl}/anime?search-keywords=${title}`, {
         headers: {
-          "User-Agent":
-          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
-        "X-Requested-With": "XMLHttpRequest",
+          "User-Agent": USER_AGENT,
+          "Accept-Encoding": ACCEPT_ENCODING_HEADER,
+          "Accept": ACCEPT_HEADER,
         },
       });
       // console.log(`Animefox: ${$(".film_list-wrap .flw-item").first().html()}`);
