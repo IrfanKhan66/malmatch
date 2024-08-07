@@ -12,7 +12,6 @@ export const initTable = () => {
         id INTEGER PRIMARY KEY,
         Animefox TEXT,
         Animepahe TEXT,
-        Aniwave TEXT,
         Bilibili TEXT,
         Gogoanime TEXT,
         Yugenanime TEXT,
@@ -28,14 +27,14 @@ export const saveAnime = (resp: IResponse) => {
 
     db.run(
       `
-        INSERT INTO MappedAnime (id, Animefox, Animepahe, Aniwave, Bilibili, Gogoanime, Yugenanime, Zoro)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO MappedAnime (id, Animefox, Animepahe, Bilibili, Gogoanime, Yugenanime, Zoro)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
     `,
       [
         malId,
         JSON.stringify(data?.Sites.Animefox),
         JSON.stringify(data?.Sites.Animepahe),
-        JSON.stringify(data?.Sites.Aniwave),
+        // JSON.stringify(data?.Sites.Aniwave),
         JSON.stringify(data?.Sites.Bilibili),
         JSON.stringify(data?.Sites.Gogoanime),
         JSON.stringify(data?.Sites.Yugenanime),
@@ -66,13 +65,13 @@ export const updateAnime = async (
     const updateQuery = (id: number, sites: Sites) => {
       return db
         .query(
-          "UPDATE MappedAnime SET Animefox = $animefox, Animepahe = $animepahe, Aniwave = $aniwave, Bilibili = $bilibili, Gogoanime = $gogoanime, Yugenanime = $yugenanime, Zoro = $zoro WHERE id = $id"
+          "UPDATE MappedAnime SET Animefox = $animefox, Animepahe = $animepahe, Bilibili = $bilibili, Gogoanime = $gogoanime, Yugenanime = $yugenanime, Zoro = $zoro WHERE id = $id"
         )
         .run({
           $id: id,
           $animefox: JSON.stringify(sites.Animefox),
           $animepahe: JSON.stringify(sites.Animepahe),
-          $aniwave: JSON.stringify(sites.Aniwave),
+          // $aniwave: JSON.stringify(sites.Aniwave),
           $bilibili: JSON.stringify(sites.Bilibili),
           $gogoanime: JSON.stringify(sites.Gogoanime),
           $yugenanime: JSON.stringify(sites.Yugenanime),

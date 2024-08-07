@@ -6,7 +6,7 @@ import similarity from "../methods/similarity";
 export default class Aniwave {
   private readonly baseUrl = "https://aniwave.se";
 
-  async search(title: string): Promise<Pick<Sites, "Aniwave"> | null> {
+  async search(title: string): Promise<any| null> {
     try {
       logger.info("Fetching data from aniwave...");
 
